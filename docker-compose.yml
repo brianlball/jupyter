@@ -1,10 +1,10 @@
 version: '3'
 services:
   notebook:
-    container_name: jupyter_notebook
+    container_name: jupyter_datascience
     labels:
-      description: Jupyter Notebook
-      name: jupyter 
+      description: Jupyter DataScience Notebook
+      name: jupyter_datascience
     ports:
       - "8888:8888"
     volumes:
