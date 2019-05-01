@@ -1,6 +1,7 @@
 FROM jupyter/datascience-notebook
 
 RUN conda install --quiet --yes \
-    'r-rstan' 
+    'r-rstan' \
+    'r-plotly'
 
 CMD jupyter notebook --port=8888 --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token='' --NotebookApp.password=''
