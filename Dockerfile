@@ -10,6 +10,7 @@ RUN chown $NB_USER:users /home/$NB_USER/parallelCoords.ipynb
 USER $NB_UID     
 RUN conda install --quiet --yes \
     'r-rstan' \
+    'r-fields' \
     'r-plotly' \
     'r-devtools' \
     && R -e "devtools::install_github('timelyportfolio/parcoords')"
