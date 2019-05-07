@@ -3,9 +3,14 @@ FROM jupyter/datascience-notebook
 USER root
 #link gtar to tar for devtools::install_github to work
 RUN ln -s /bin/tar /bin/gtar
+
+#setup directory structure
+RUN mkdir /home/$NB_USER/data && chown $NB_USER:users /home/$NB_USER/data && chmod 775 /home/$NB_USER/data
+RUN mkdir /home/$NB_USER/notebooks && chown $NB_USER:users /home/$NB_USER/notebooks && chmod 775 /home/$NB_USER/notebooks
+
 #copy notebooks over and set permissions to joyvan
-COPY ./parallelCoords.ipynb /home/$NB_USER/parallelCoords.ipynb
-RUN chown $NB_USER:users /home/$NB_USER/parallelCoords.ipynb
+COPY ./parallelCoords.ipynb /home/$NB_USER/notebooks/parallelCoords.ipynb
+RUN chown $NB_USER:users /home/$NB_USER/notebooks/parallelCoords.ipynb
      
 USER $NB_UID     
 RUN conda install --quiet --yes \
@@ -16,7 +21,7 @@ RUN conda install --quiet --yes \
     && R -e "devtools::install_github('timelyportfolio/parcoords')"
 
 #trust all notebooks
-RUN find /home/$NB_USER -name '*.ipynb' -exec jupyter trust {} \;
+RUN find /home/$NB_USER/notebooks -name '*.ipynb' -exec jupyter trust {} \;
 
 #start with no creditials, TODO: make secure for production
 CMD ["jupyter", \
