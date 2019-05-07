@@ -1,10 +1,10 @@
 version: '3'
 services:
   notebook:
-    container_name: jupyter_datascience
+    container_name: openstudio-jupyter
     labels:
       description: Jupyter DataScience Notebook
-      name: jupyter_datascience
+      name: openstudio-jupyter
     ports:
       - "8888:8888"
     volumes:

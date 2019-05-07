@@ -18,6 +18,7 @@ RUN conda install --quiet --yes \
 #trust all notebooks
 RUN find /home/$NB_USER -name '*.ipynb' -exec jupyter trust {} \;
 
+#start with no creditials, TODO: make secure for production
 CMD ["jupyter", \
      "notebook", \
      "--port=8888", \
